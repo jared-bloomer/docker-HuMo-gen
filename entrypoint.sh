@@ -2,7 +2,7 @@
 set -x
 
 /etc/init.d/mysql start 
-exec /setupDB.sh 
+/bin/bash /setupDB.sh 
 /usr/sbin/apache2ctl -D FORGROUND
 
 while true; do
