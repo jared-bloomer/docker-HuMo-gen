@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x 
 
 is_IP() {
 if [ $(echo $1 | grep -o '\.' | wc -l) -ne 3 ]; then
@@ -33,14 +34,14 @@ result2=$(is_IP $DBHOST)
 
 # Update Humo-genealogy Config Files for Database
 if [[ -z $result2 ]]; then
-  sed -i '' -e '/^define("DATABASE_HOST"/s/localhost/'"$DBHOST"'/' /var/www/html/include/db_login.php
+  sed -i -e '/^define("DATABASE_HOST"/s/localhost/'"$DBHOST"'/' /var/www/html/include/db_login.php
 else
-  sed -i '' -e '/^define("DATABASE_HOST"/s/localhost/'"$DBHOST"'/' /var/www/html/include/db_login.php
+  sed -i -e '/^define("DATABASE_HOST"/s/localhost/'"$DBHOST"'/' /var/www/html/include/db_login.php
 fi
 
-sed -i '' -e '/^define("DATABASE_USERNAME"/s/root/'"$DBUSERNAME"'/' /var/www/html/include/db_login.php
-sed -i '' -e 's/define("DATABASE_PASSWORD", ''/define("DATABASE_PASSWORD", '"$DBPASS"'/' /var/www/html/include/db_login.php
-sed -i '' -e '/^define("DATABASE_NAME"/s/humo-gen/'"$DBNAME"'/' /var/www/html/include/db_login.php
+sed -i -e '/^define("DATABASE_USERNAME"/s/root/'"$DBUSERNAME"'/' /var/www/html/include/db_login.php
+sed -i -e 's/define("DATABASE_PASSWORD".*/define("DATABASE_PASSWORD", '\'''"$DBPASS"'\'\''\)\;/' /var/www/html/include/db_login.php
+sed -i -e '/^define("DATABASE_NAME"/s/humo-gen/'"$DBNAME"'/' /var/www/html/include/db_login.php
 
 
 
