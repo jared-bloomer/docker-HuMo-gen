@@ -6,6 +6,7 @@ RUN apt-get update -y && \
 COPY humogen/ /var/www/html/
 RUN sed -i '/extension\=pdo_mysql/s/^\;//g' /etc/php/7.4/apache2/php.ini && \
     sed -i '/extension\=pdo_sqlite/s/^\;//g' /etc/php/7.4/apache2/php.ini
+    sed -i '/extension=curl/s/^\;//g' /etc/php/7.4/apache2/php.ini
 RUN echo "" >> /var/www/html/admin/php.ini && echo "extension=pdo" >> /var/www/html/admin/php.ini && \
     echo "extension=pdo_sqlite" >> /var/www/html/admin/php.ini && \
     echo "extension=pdo_mysql" >> /var/www/html/admin/php.ini
