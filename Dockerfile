@@ -5,7 +5,7 @@ RUN apt-get update -y && \
     apt install apache2 php mariadb-server mariadb-client php-mysql php-sqlite3 php-curl -y
 COPY humogen/ /var/www/html/
 RUN sed -i '/extension\=pdo_mysql/s/^\;//g' /etc/php/7.4/apache2/php.ini && \
-    sed -i '/extension\=pdo_sqlite/s/^\;//g' /etc/php/7.4/apache2/php.ini
+    sed -i '/extension\=pdo_sqlite/s/^\;//g' /etc/php/7.4/apache2/php.ini && \
     sed -i '/extension=curl/s/^\;//g' /etc/php/7.4/apache2/php.ini
 RUN echo "" >> /var/www/html/admin/php.ini && echo "extension=pdo" >> /var/www/html/admin/php.ini && \
     echo "extension=pdo_sqlite" >> /var/www/html/admin/php.ini && \
