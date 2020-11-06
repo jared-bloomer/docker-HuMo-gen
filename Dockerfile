@@ -2,7 +2,7 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && \
     apt-get upgrade -y && \
-    apt install apache2 php mariadb-server mariadb-client php-mysql php-sqlite3 php-curl -y
+    apt install apache2 php libapache2-mod-php mariadb-server mariadb-client php-mysql php-sqlite3 php-curl -y
 COPY humogen/ /var/www/html/
 RUN sed -i '/extension\=pdo_mysql/s/^\;//g' /etc/php/7.4/apache2/php.ini && \
     sed -i '/extension\=pdo_sqlite/s/^\;//g' /etc/php/7.4/apache2/php.ini && \
